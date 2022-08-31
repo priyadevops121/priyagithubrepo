@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "outputempdatabase",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourcepath": "@triggerBody().folderPath",
+					"sourcefilename": "@triggerBody().fileName"
 				}
 			}
 		],
