@@ -1,0 +1,9 @@
+{
+	"name": "firstadfpipeline1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9b83f343-8327-4be4-84dc-fd76184c9be2",
+		"tenantId": "0be7f63b-2660-4991-acee-a2c8878767fb"
+	}
+}
