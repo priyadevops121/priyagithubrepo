@@ -61,6 +61,16 @@
 				]
 			}
 		],
+		"parameters": {
+			"sourcepath": {
+				"type": "string",
+				"defaultValue": "@triggerBody().folderPath"
+			},
+			"sourcefilename": {
+				"type": "string",
+				"defaultValue": "@triggerBody().fileName"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2022-08-30T18:18:33Z"
 	},
