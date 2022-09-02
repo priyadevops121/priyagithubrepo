@@ -12,17 +12,45 @@
 					"name": "EmpData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					},
+					"name": "UpdatedEmpData"
+				}
+			],
 			"transformations": [
 				{
-					"name": "FullName"
+					"name": "EmpFullName"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Emp_id as short,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> EmpData",
-				"EmpData derive() ~> FullName"
+				"EmpData derive(FullName = concat(FirstName, ' ',LastName)) ~> EmpFullName",
+				"EmpFullName sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Emp_id,",
+				"          FirstName,",
+				"          LastName,",
+				"          FullName,",
+				"          Occupation,",
+				"          Department",
+				"     )) ~> UpdatedEmpData"
 			]
 		}
 	}

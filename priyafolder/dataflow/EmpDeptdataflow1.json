@@ -34,7 +34,15 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Emp_id as short,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> EmpDataFlow",
 				"source(allowSchemaDrift: true,",
