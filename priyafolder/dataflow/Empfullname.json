@@ -1,0 +1,66 @@
+{
+	"name": "Empfullname",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					},
+					"name": "EmpData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputempdataset",
+						"type": "DatasetReference"
+					},
+					"name": "UpdatedEmpData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EmpFullName"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Emp_id as short,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpData",
+				"EmpData derive(FullName = concat(FirstName, ' ',LastName)) ~> EmpFullName",
+				"EmpFullName sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string,",
+				"          Column_5 as string,",
+				"          Column_6 as string,",
+				"          Column_7 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Emp_id,",
+				"          FirstName,",
+				"          LastName,",
+				"          FullName,",
+				"          Occupation,",
+				"          Department",
+				"     )) ~> UpdatedEmpData"
+			]
+		}
+	}
+}

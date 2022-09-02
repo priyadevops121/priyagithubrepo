@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "EmpNameUpdate",
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "EmpNameDF",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "EmpDeptdataflow1",
+						"referenceName": "Empfullname",
 						"type": "DataFlowReference"
 					},
 					"compute": {
