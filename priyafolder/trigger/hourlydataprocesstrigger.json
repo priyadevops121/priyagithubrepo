@@ -2,13 +2,7 @@
 	"name": "hourlydataprocesstrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipeline": {
-			"pipelineReference": {
-				"referenceName": "hourlydataprocesspipeline",
-				"type": "PipelineReference"
-			}
-		},
+		"runtimeState": "Stopped",
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",

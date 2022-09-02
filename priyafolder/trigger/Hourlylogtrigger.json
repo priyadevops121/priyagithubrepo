@@ -2,13 +2,7 @@
 	"name": "Hourlylogtrigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipeline": {
-			"pipelineReference": {
-				"referenceName": "hourlylogspipeline",
-				"type": "PipelineReference"
-			}
-		},
+		"runtimeState": "Stopped",
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
