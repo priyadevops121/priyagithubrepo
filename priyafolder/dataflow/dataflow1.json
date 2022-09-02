@@ -1,0 +1,29 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					},
+					"name": "EmpData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "FullName"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpData",
+				"EmpData derive() ~> FullName"
+			]
+		}
+	}
+}
