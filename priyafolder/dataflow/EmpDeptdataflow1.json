@@ -71,13 +71,6 @@
 				"     partitionFileNames:['EmpDeptoutputdata'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     mapColumn(",
-				"          No = Column_1,",
-				"          Age = Column_2,",
-				"          Gender = Column_3,",
-				"          Salary = department,",
-				"          Occupation = department_id",
-				"     ),",
 				"     partitionBy('hash', 1)) ~> EmpDeptDataoutput"
 			]
 		}
