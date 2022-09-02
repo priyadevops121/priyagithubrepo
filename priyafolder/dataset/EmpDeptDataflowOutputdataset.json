@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "EmpDeptJoin.csv",
 				"folderPath": "output",
 				"container": "empdb"
 			},
