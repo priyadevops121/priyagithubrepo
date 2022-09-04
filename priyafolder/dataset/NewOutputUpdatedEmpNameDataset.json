@@ -1,5 +1,5 @@
 {
-	"name": "outputempdataset",
+	"name": "NewOutputUpdatedEmpNameDataset",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",

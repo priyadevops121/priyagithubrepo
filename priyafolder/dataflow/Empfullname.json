@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "outputempdataset",
+						"referenceName": "NewOutputUpdatedEmpNameDataset",
 						"type": "DatasetReference"
 					},
 					"name": "UpdatedEmpData"
