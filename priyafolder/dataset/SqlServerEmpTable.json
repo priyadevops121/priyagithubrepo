@@ -1,0 +1,16 @@
+{
+	"name": "SqlServerEmpTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Employee",
+			"table": "csv"
+		}
+	}
+}
