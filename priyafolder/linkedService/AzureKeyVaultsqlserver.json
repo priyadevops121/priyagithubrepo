@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVaultsqlserver",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://priyadevkv.vault.azure.net/"
+		}
+	}
+}
