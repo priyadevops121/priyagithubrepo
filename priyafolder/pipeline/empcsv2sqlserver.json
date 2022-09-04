@@ -133,7 +133,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SqlServerTable1",
+						"referenceName": "SqlServerEmpTable",
 						"type": "DatasetReference"
 					}
 				]
