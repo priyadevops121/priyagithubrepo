@@ -1,0 +1,19 @@
+{
+	"name": "SqlServer1",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Data Source=priyazuresqlserver;Initial Catalog=priyasqlserver;User ID=priya",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVaultsqlserver",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "secretdevstring",
+				"secretVersion": "a7956db1c6274f0faa9b09ae0af01296"
+			}
+		}
+	}
+}
