@@ -9,8 +9,8 @@
 		"type": "SqlServerTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "Employee",
-			"table": "csv"
+			"schema": "EmployeeDataBase",
+			"table": "Emp"
 		}
 	}
 }
