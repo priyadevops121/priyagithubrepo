@@ -1,9 +1,9 @@
 {
-	"name": "empintosqldb",
+	"name": "empcsv2sqlserver",
 	"properties": {
 		"activities": [
 			{
-				"name": "empdataintosql",
+				"name": "empcsv2sqlserver",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -31,11 +31,25 @@
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "inputempdataset",
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SqlServerEmpTable",
 						"type": "DatasetReference"
 					}
 				]
