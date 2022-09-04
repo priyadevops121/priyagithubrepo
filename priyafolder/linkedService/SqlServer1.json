@@ -4,15 +4,14 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "Integrated Security=False;Data Source=priyazuresqlserver;Initial Catalog=priyasqlserver;User ID=priya",
-			"password": {
+			"connectionString": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
-					"referenceName": "AzureKeyVaultsqlserver",
+					"referenceName": "AzureKeyVault1",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "secretdevstring",
-				"secretVersion": "a7956db1c6274f0faa9b09ae0af01296"
+				"secretName": "azure2sqlserver",
+				"secretVersion": "4c49f67c3bbf49d498bf95fbaaadb164"
 			}
 		}
 	}
