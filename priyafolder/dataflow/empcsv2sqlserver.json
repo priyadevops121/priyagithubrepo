@@ -21,7 +21,11 @@
 					"name": "empsqlserver"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "CountDept"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Emp_id as integer,",
@@ -34,7 +38,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> empdatacsv",
-				"empdatacsv sink(allowSchemaDrift: true,",
+				"empdatacsv aggregate(groupBy(Department),",
+				"     Department_Count = count(Department)) ~> CountDept",
+				"CountDept sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

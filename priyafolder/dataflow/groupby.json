@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "groupby",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
