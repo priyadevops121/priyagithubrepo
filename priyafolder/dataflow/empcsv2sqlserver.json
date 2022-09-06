@@ -18,7 +18,11 @@
 						"referenceName": "SqlServerTable1",
 						"type": "DatasetReference"
 					},
-					"name": "empsqlserver"
+					"name": "empsqlserver",
+					"rejectedDataLinkedService": {
+						"referenceName": "adf2rgcontaineremp",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -48,7 +52,11 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> empsqlserver"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Department,",
+				"          Department_Count",
+				"     )) ~> empsqlserver"
 			]
 		}
 	}
