@@ -1,0 +1,29 @@
+{
+	"name": "Sales_Month_Country_flow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesMonthCountry_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "SalesMonthCountry"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Month"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SalesMonthCountry",
+				"SalesMonthCountry derive(Month = ERROR_FUNCTION('')) ~> Month"
+			]
+		}
+	}
+}
