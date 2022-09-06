@@ -1,0 +1,29 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesMonthCountry_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "CountryMonthlysalesCSV"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "CalcMonth"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> CountryMonthlysalesCSV",
+				"CountryMonthlysalesCSV derive(NewMonth = month(NewMonth)) ~> CalcMonth"
+			]
+		}
+	}
+}
