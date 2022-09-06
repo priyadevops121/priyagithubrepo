@@ -1,0 +1,24 @@
+{
+	"name": "SalesCount",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesMonthCountry_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "salesmonthcountry"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> salesmonthcountry"
+			]
+		}
+	}
+}
