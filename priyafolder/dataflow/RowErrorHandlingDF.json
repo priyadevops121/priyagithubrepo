@@ -1,0 +1,87 @@
+{
+	"name": "RowErrorHandlingDF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesDataCSV",
+						"type": "DatasetReference"
+					},
+					"name": "SalesCSV"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TableSalesBadDataset",
+						"type": "DatasetReference"
+					},
+					"name": "TableSalesBad"
+				},
+				{
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					},
+					"name": "FiTableSales"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				},
+				{
+					"name": "FileNameColforErrorRows"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SalesCSV",
+				"SalesCSV split(isNull(toDate(Column_1,'dd-mmm-yyyy')),",
+				"     disjoint: false) ~> split1@(ErrorRows, GoodRows)",
+				"split1@ErrorRows derive(FileName = 'sales2020.csv') ~> FileNameColforErrorRows",
+				"FileNameColforErrorRows sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SaleDate as string,",
+				"          SaleItem as string,",
+				"          Country as string,",
+				"          Quantity as string,",
+				"          FileName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          SaleDate = Column_1,",
+				"          SaleItem = Column_2,",
+				"          Country = Column_3,",
+				"          Quantity = Column_4,",
+				"          FileName",
+				"     )) ~> TableSalesBad",
+				"split1@GoodRows sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> FiTableSales"
+			]
+		}
+	}
+}

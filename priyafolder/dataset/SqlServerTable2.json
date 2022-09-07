@@ -1,0 +1,54 @@
+{
+	"name": "SqlServerTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "surrKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "emp_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FirstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Salary",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Occupation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Department",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "isActive",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp1"
+		}
+	}
+}

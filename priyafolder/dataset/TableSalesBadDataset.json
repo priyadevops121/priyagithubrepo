@@ -1,0 +1,37 @@
+{
+	"name": "TableSalesBadDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "SaleDate",
+				"type": "varchar"
+			},
+			{
+				"name": "SaleItem",
+				"type": "varchar"
+			},
+			{
+				"name": "Country",
+				"type": "varchar"
+			},
+			{
+				"name": "Quantity",
+				"type": "varchar"
+			},
+			{
+				"name": "FileName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "EmployeeDataBase",
+			"table": "Sales_Bad"
+		}
+	}
+}

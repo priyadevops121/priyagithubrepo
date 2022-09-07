@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "outputempdatabase",
+					"referenceName": "empdeptiddb",
 					"type": "PipelineReference"
 				},
 				"parameters": {

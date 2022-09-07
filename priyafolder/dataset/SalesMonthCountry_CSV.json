@@ -1,5 +1,5 @@
 {
-	"name": "inputempdataset",
+	"name": "SalesMonthCountry_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "employee.csv",
+				"fileName": "Sales_Month_Country.csv",
 				"folderPath": "input",
 				"container": "empdb"
 			},
@@ -19,29 +19,6 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			}
-		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		"schema": []
+	}
 }

@@ -1,5 +1,5 @@
 {
-	"name": "Empnameupdatepl",
+	"name": "CopyEmpdatain2outcontainer",
 	"properties": {
 		"activities": [
 			{
@@ -49,13 +49,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "inputempdataset",
+						"referenceName": "empcsvdataset",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "outputempdataset",
+						"referenceName": "NewOutputUpdatedEmpNameDataset",
 						"type": "DatasetReference"
 					}
 				]

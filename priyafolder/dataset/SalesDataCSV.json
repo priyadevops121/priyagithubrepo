@@ -1,5 +1,5 @@
 {
-	"name": "outputempdataset",
+	"name": "SalesDataCSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "UpdatedName.csv",
-				"folderPath": "output",
+				"fileName": "sales2020.csv",
+				"folderPath": "input",
 				"container": "empdb"
 			},
 			"columnDelimiter": ",",
@@ -31,17 +31,7 @@
 			},
 			{
 				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
 			}
 		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

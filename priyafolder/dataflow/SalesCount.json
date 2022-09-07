@@ -1,0 +1,29 @@
+{
+	"name": "SalesCount",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesMonthCountry_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "salesmonthcountry"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> salesmonthcountry",
+				"salesmonthcountry derive(month = month(saledate)) ~> derivedColumn1"
+			]
+		}
+	}
+}

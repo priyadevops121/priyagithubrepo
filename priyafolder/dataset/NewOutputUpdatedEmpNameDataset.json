@@ -1,5 +1,5 @@
 {
-	"name": "empcsvdataset",
+	"name": "NewOutputUpdatedEmpNameDataset",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "employee.csv",
-				"folderPath": "input",
+				"fileName": "UpdatedName.csv",
+				"folderPath": "output",
 				"container": "empdb"
 			},
 			"columnDelimiter": ",",
@@ -21,29 +21,27 @@
 		},
 		"schema": [
 			{
-				"name": "Emp_id",
 				"type": "String"
 			},
 			{
-				"name": "FirstName",
 				"type": "String"
 			},
 			{
-				"name": "LastName",
 				"type": "String"
 			},
 			{
-				"name": "Salary",
 				"type": "String"
 			},
 			{
-				"name": "Occupation",
 				"type": "String"
 			},
 			{
-				"name": "Department",
+				"type": "String"
+			},
+			{
 				"type": "String"
 			}
 		]
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
