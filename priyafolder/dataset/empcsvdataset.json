@@ -19,6 +19,31 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Emp_id",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "Salary",
+				"type": "String"
+			},
+			{
+				"name": "Occupation",
+				"type": "String"
+			},
+			{
+				"name": "Department",
+				"type": "String"
+			}
+		]
 	}
 }
