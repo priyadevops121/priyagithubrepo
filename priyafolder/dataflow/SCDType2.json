@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "SCDType2",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,11 +9,55 @@
 						"referenceName": "empcsvdataset",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "EmpCSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "SqlServerEmpTable",
+						"type": "DatasetReference"
+					},
+					"name": "Emp1Table"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SqlServerTable2",
+						"type": "DatasetReference"
+					},
+					"name": "SCDType2"
+				},
+				{
+					"dataset": {
+						"referenceName": "SqlServerEmpTable",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "isActiveColAdd"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "ExistingRowsInSourceSink"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "alterRow1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Emp_id as integer,",
@@ -25,7 +69,101 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> EmpCSV",
+				"source(output(",
+				"          surrKey as integer,",
+				"          emp_id as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as integer,",
+				"          isActive as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Emp1Table",
+				"EmpCSV derive(isActive = 1) ~> isActiveColAdd",
+				"Emp1Table select(mapColumn(",
+				"          SQLsurrKey = surrKey,",
+				"          SQLemp_id = emp_id,",
+				"          SQLFirstName = FirstName,",
+				"          SQLLastName = LastName,",
+				"          SQLSalary = Salary,",
+				"          SQLOccupation = Occupation,",
+				"          SQLDepartment = Department,",
+				"          SQLisActive = isActive",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"EmpCSV, select1 lookup(Emp_id == SQLemp_id,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 filter(!isNull(SQLemp_id)) ~> ExistingRowsInSourceSink",
+				"ExistingRowsInSourceSink select(mapColumn(",
+				"          SQLsurrKey,",
+				"          SQLemp_id,",
+				"          SQLFirstName,",
+				"          SQLLastName,",
+				"          SQLSalary,",
+				"          SQLOccupation,",
+				"          SQLDepartment,",
+				"          SQLisActive",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 derive(SQLisActive = 0) ~> derivedColumn1",
+				"derivedColumn1 alterRow(updateIf(1==1)) ~> alterRow1",
+				"isActiveColAdd sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          surrKey as integer,",
+				"          emp_id as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as integer,",
+				"          isActive as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          emp_id = Emp_id,",
+				"          FirstName,",
+				"          LastName,",
+				"          Salary,",
+				"          Occupation,",
+				"          Department,",
+				"          isActive",
+				"     )) ~> SCDType2",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['surrKey'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          surrKey = SQLsurrKey,",
+				"          emp_id = SQLemp_id,",
+				"          FirstName = SQLFirstName,",
+				"          LastName = SQLLastName,",
+				"          Salary = SQLSalary,",
+				"          Occupation = SQLOccupation,",
+				"          Department = SQLDepartment,",
+				"          isActive = SQLisActive",
+				"     )) ~> sink1"
 			]
 		}
 	}
