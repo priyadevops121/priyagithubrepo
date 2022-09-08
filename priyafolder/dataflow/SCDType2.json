@@ -56,6 +56,9 @@
 				},
 				{
 					"name": "alterRow1"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -84,7 +87,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Emp1Table",
-				"EmpCSV derive(isActive = 1) ~> isActiveColAdd",
+				"select3 derive(isActive = 1) ~> isActiveColAdd",
 				"Emp1Table select(mapColumn(",
 				"          SQLsurrKey = surrKey,",
 				"          SQLemp_id = emp_id,",
@@ -116,6 +119,16 @@
 				"     skipDuplicateMapOutputs: true) ~> select2",
 				"select2 derive(SQLisActive = 0) ~> derivedColumn1",
 				"derivedColumn1 alterRow(updateIf(1==1)) ~> alterRow1",
+				"EmpCSV select(mapColumn(",
+				"          Emp_id,",
+				"          FirstName,",
+				"          LastName,",
+				"          Salary,",
+				"          Occupation,",
+				"          Department",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
 				"isActiveColAdd sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
