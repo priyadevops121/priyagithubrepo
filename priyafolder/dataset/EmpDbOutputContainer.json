@@ -1,0 +1,48 @@
+{
+	"name": "EmpDbOutputContainer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf2rgcontaineremp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "output",
+				"container": "empdb"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Emp_id",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "FullName",
+				"type": "String"
+			},
+			{
+				"name": "Occupation",
+				"type": "String"
+			},
+			{
+				"name": "Department",
+				"type": "String"
+			}
+		]
+	}
+}
