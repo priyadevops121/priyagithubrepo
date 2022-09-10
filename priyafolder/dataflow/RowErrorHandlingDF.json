@@ -38,6 +38,9 @@
 				},
 				{
 					"name": "FileNameColforErrorRows"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -53,6 +56,8 @@
 				"SalesCSV split(isNull(toDate(SaleDate,'dd-mmm-yyyy')),",
 				"     disjoint: false) ~> split1@(ErrorRows, GoodRows)",
 				"split1@ErrorRows derive(FileName = 'sales2020.csv') ~> FileNameColforErrorRows",
+				"split1@GoodRows derive(filename = 'sales2020.csv',",
+				"          SaleDate = toDate(SaleDate, 'dd-mmm-yyyy')) ~> derivedColumn1",
 				"FileNameColforErrorRows sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -76,7 +81,7 @@
 				"          Quantity,",
 				"          FileName",
 				"     )) ~> TableSalesBad",
-				"split1@GoodRows sink(allowSchemaDrift: true,",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -84,7 +89,14 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> FiTableSales"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          SaleDate,",
+				"          SaleItem,",
+				"          Country,",
+				"          Quantity,",
+				"          filename",
+				"     )) ~> FiTableSales"
 			]
 		}
 	}
