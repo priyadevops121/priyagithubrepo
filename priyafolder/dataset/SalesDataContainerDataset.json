@@ -1,0 +1,27 @@
+{
+	"name": "SalesDataContainerDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf2rgcontaineremp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [
+			"FileName"
+		],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sales"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}
