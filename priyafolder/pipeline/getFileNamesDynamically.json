@@ -97,13 +97,13 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SalesDataContainerDataset",
+									"referenceName": "SalesDataContainerDataset1",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "DelimitedText1",
+									"referenceName": "EmpDbOutputContainer",
 									"type": "DatasetReference"
 								}
 							]

@@ -1,18 +1,11 @@
 {
-	"name": "SalesDataContainerDataset",
+	"name": "SalesDataContainerDataset1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"Filename": {
-				"type": "string"
-			}
-		},
-		"annotations": [
-			"FileName"
-		],
+		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
@@ -21,10 +14,12 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "Saleorderno,SaleDate,SaleItem,Country,Quantity,,,,,,",
 				"type": "String"
 			}
 		]
