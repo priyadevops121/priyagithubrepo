@@ -5,22 +5,12 @@
 			"referenceName": "SqlServer1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"source": {
-				"type": "string",
-				"defaultValue": "@triggerBody().Folderpath"
-			},
-			"destination": {
-				"type": "string",
-				"defaultValue": "@triggerBody().filename"
-			}
-		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "employee",
-			"table": "emp"
+			"schema": "EmployeeDataBase",
+			"table": "Sales"
 		}
 	}
 }
