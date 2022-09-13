@@ -1,0 +1,23 @@
+{
+	"name": "fromlastmodifieddate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf2rgcontaineremp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "fromlastmodifieddate",
+				"container": "empdb"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
