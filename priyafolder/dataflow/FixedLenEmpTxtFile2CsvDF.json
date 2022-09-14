@@ -19,6 +19,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "EmpfixedlenTxt2csv2output"
+				},
+				{
+					"dataset": {
+						"referenceName": "SqlServerTable3",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -61,7 +68,16 @@
 				"     partitionFileNames:['EmpfixedlenTxt2csv2output.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> EmpfixedlenTxt2csv2output"
+				"     partitionBy('hash', 1)) ~> EmpfixedlenTxt2csv2output",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
