@@ -1,16 +1,33 @@
 {
-	"name": "SqlServerTable3",
+	"name": "dataset2priyasqlserverLs",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SqlServer1",
-			"type": "LinkedServiceReference"
+			"referenceName": "priyasqlserver",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"dbName": {
+					"value": "@dataset().dbNameinDataSet",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"tableName": {
+				"type": "string"
+			},
+			"dbNameinDataSet": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "EmpTxtData"
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
