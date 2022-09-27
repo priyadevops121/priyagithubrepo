@@ -41,7 +41,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"tableName": {
-								"value": "@pipeline().parameters.TableNamefromPipeline",
+								"value": "@pipeline().parameters.sourceTableFromPipeline",
 								"type": "Expression"
 							},
 							"dbNameinDataSet": {
@@ -57,7 +57,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"tableName": {
-								"value": "@pipeline().parameters.TableNamefromPipeline",
+								"value": "@pipeline().parameters.destinationTableFromPipeline",
 								"type": "Expression"
 							},
 							"dbNameinDataSet": {
@@ -70,10 +70,13 @@
 			}
 		],
 		"parameters": {
-			"TableNamefromPipeline": {
+			"sourceTableFromPipeline": {
 				"type": "string"
 			},
 			"dbNameFrompipeline": {
+				"type": "string"
+			},
+			"destinationTableFromPipeline": {
 				"type": "string"
 			}
 		},

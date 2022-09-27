@@ -1,0 +1,29 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "priyasqlserverLS2datasetParameters",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourceTableFromPipeline": "table1",
+					"dbNameFrompipeline": "TestDB",
+					"destinationTableFromPipeline": "Table2"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2022-09-27T19:46:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
