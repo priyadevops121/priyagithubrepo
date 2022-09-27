@@ -5,13 +5,21 @@
 		"parameters": {
 			"dbName": {
 				"type": "string"
+			},
+			"serverName": {
+				"type": "string"
+			},
+			"userName": {
+				"type": "string"
+			},
+			"password": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=priyaserver.windows.db.net;initial catalog=@{linkedService().dbName};user id=priya",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDE2RUU3QUI3LTc2RUItNDIyQi1COTczLTQzMTIyNjc0QjYyMV82YWI3ZGRhMC1jZTE4LTRlMjktYjdhZi01OTY2ZDM4MjVjMzYiDQp9"
+			"connectionString": "Integrated Security=False;Data Source=@{linkedService().serverName};Initial Catalog=@{linkedService().dbName};User ID=@{linkedService().userName};Password=@{linkedService().password}"
 		}
 	}
 }
