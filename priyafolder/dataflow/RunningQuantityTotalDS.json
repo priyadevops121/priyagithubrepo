@@ -48,6 +48,12 @@
 				"     partitionFileNames:['RunningQuantityTotal.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          PurchaseId,",
+				"          ItemName,",
+				"          Quantity,",
+				"          RunningQuantityTotal",
+				"     ),",
 				"     partitionBy('hash', 1)) ~> RunningQuantityTotal"
 			]
 		}
