@@ -47,7 +47,8 @@
 				"     ),",
 				"     partitionFileNames:['RunningQuantityTotal.csv'],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> RunningQuantityTotal"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> RunningQuantityTotal"
 			]
 		}
 	}
