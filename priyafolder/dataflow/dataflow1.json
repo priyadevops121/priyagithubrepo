@@ -1,0 +1,54 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
+					"name": "PurchaseDetailscsv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText4",
+						"type": "DatasetReference"
+					},
+					"name": "RunningQuantityTotal"
+				}
+			],
+			"transformations": [
+				{
+					"name": "window1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PurchaseId as string,",
+				"          ItemName as string,",
+				"          Quantity as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> PurchaseDetailscsv",
+				"PurchaseDetailscsv window(asc(Quantity, true),",
+				"     RunningQuantityTotal = sum(toInteger(Quantity))) ~> window1",
+				"window1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
+				"     partitionFileNames:['RunningQuantityTotal.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RunningQuantityTotal"
+			]
+		}
+	}
+}
