@@ -1,0 +1,40 @@
+{
+	"name": "empcsvempdatacsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adf2rgcontaineremp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "output",
+				"container": "empdb"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1000",
+				"type": "String"
+			},
+			{
+				"name": "PRIYA     ",
+				"type": "String"
+			},
+			{
+				"name": "AP",
+				"type": "String"
+			},
+			{
+				"name": "7204909746",
+				"type": "String"
+			}
+		]
+	}
+}

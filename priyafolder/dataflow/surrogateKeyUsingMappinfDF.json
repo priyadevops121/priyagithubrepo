@@ -1,0 +1,114 @@
+{
+	"name": "surrogateKeyUsingMappinfDF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					},
+					"name": "Empcsv"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "EmpDataCsv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "empcsvempdatacsv",
+						"type": "DatasetReference"
+					},
+					"name": "empcsvempdatacsv"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "surrogateKey1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "union1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Emp_id as string,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as string,",
+				"          Occupation as string,",
+				"          Department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Empcsv",
+				"source(output(",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as string,",
+				"          Occupation as string,",
+				"          Department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> EmpDataCsv",
+				"Empcsv derive(dummy = 'dummy') ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(dummy),",
+				"     MaxId = max(Emp_id)) ~> aggregate1",
+				"aggregate1, EmpDataCsv join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 keyGenerate(output(id as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 derive(id = toInteger(id) + toInteger(MaxId)) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          id,",
+				"          FirstName,",
+				"          LastName,",
+				"          Salary,",
+				"          Occupation,",
+				"          Department",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"Empcsv union(byName: true)~> union1",
+				"union1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {1000} as string,",
+				"          {PRIYA     } as string,",
+				"          AP as string,",
+				"          {7204909746} as string",
+				"     ),",
+				"     partitionFileNames:['empcsvempdatacsv2surrogate.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> empcsvempdatacsv"
+			]
+		}
+	}
+}
