@@ -34,6 +34,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -61,7 +64,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     wildcardPaths:[('log' + )]) ~> source1",
+				"     wildcardPaths:[('log/' + $logFileName)]) ~> source1",
 				"priyadummytxt derive(ADFname = $ADFname,",
 				"          PipelineName = $PipelineName,",
 				"          Status = $Status,",
@@ -76,7 +79,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
+				"select1, source1 union(byName: true)~> union1",
+				"union1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          FirstName as string,",

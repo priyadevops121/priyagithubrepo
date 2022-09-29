@@ -15,6 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().logFileName",
+					"type": "Expression"
+				},
 				"folderPath": "log",
 				"container": "empdb"
 			},
