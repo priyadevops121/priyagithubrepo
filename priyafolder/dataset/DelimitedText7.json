@@ -1,25 +1,15 @@
 {
-	"name": "DelimitedText6",
+	"name": "DelimitedText7",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adf2rgcontaineremp",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"logFileName": {
-				"type": "String"
-			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().logFileName",
-					"type": "Expression"
-				},
-				"folderPath": "log",
 				"container": "empdb"
 			},
 			"columnDelimiter": ",",
