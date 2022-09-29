@@ -12,8 +12,23 @@
 					"name": "priyadummytxt"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText6",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"parameters{",
 				"     ADFname as string,",
@@ -21,14 +36,41 @@
 				"     Status as string,",
 				"     RunId as string,",
 				"     TriggerName as string,",
-				"     parameter1 as string",
+				"     logFileName as string",
 				"}",
 				"source(output(",
 				"          Column_1 as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> priyadummytxt"
+				"     ignoreNoFilesFound: false) ~> priyadummytxt",
+				"priyadummytxt derive(ADFname = $ADFname,",
+				"          PipelineName = $PipelineName,",
+				"          Status = $Status,",
+				"          RunId = $RunId,",
+				"          TriggerName = $TriggerName) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          ADFname,",
+				"          PipelineName,",
+				"          Status,",
+				"          RunId,",
+				"          TriggerName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as string,",
+				"          Occupation as string,",
+				"          Department as string",
+				"     ),",
+				"     partitionFileNames:[($logFileName)],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
