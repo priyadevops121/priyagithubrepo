@@ -1,0 +1,63 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empcsvdataset",
+						"type": "DatasetReference"
+					},
+					"name": "Empcsv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SqlServerEmpTable",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Emp_id as integer,",
+				"          FirstName as string,",
+				"          LastName as string,",
+				"          Salary as integer,",
+				"          Occupation as string,",
+				"          Department as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Empcsv",
+				"Empcsv alterRow(upsertIf(1==1)) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['Emp_id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Emp_id,",
+				"          FirstName,",
+				"          LastName,",
+				"          Salary,",
+				"          Occupation,",
+				"          Department",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
