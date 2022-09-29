@@ -2,7 +2,7 @@
 	"name": "SqlServerTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SqlServer1",
+			"referenceName": "priyasqlserver",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
