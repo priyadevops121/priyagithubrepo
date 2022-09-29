@@ -5,6 +5,11 @@
 			"referenceName": "adf2rgcontaineremp",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"logFileName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
